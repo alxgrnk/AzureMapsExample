@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Maps Karte</title>
+    <!-- Azure Maps CSS einbinden -->
+    <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/3/atlas.min.css" type="text/css">
+    <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/3/atlas.min.js"></script>
+    <style>
+        /* Stelle sicher, dass die Karte den gesamten verfügbaren Raum einnimmt */
+        #myMap {
+            height: 100vh; /* 100% der Bildschirmhöhe */
+            width: 100%;  /* 100% der Bildschirmbreite */
+        }
+    </style>
+</head>
+<body>
+    <div id="myMap"></div>
+
+    <script>
+        // Azure Maps API Schlüssel (denke daran, deinen eigenen Schlüssel hier zu verwenden)
+        const subscriptionKey = '';
+
+        // Karte initialisieren
+        var map = new atlas.Map('myMap', {
+            center: [9.9937, 53.5511], // Hamburg Zentrum
+            zoom: 10,
+            view: 'Auto',
+            authOptions: {
+                authType: 'subscriptionKey',
+                subscriptionKey: subscriptionKey
+            }
+        });
+
+         // Marker hinzufügen (z.B. auf den Koordinaten von Hamburg)
+         map.events.add('ready', function () {
+            var marker = new atlas.HtmlMarker({
+                position: [9.9937, 53.5511], // Position des Markers (Hamburg)
+                htmlContent: '<div style="color: blue; font-size: 24px;">📍</div>' // Marker-Inhalt (z.B. Emoji oder HTML)
+            });
+
+            map.markers.add(marker);  // Marker zur Karte hinzufügen
+        });
+    </script>
+</body>
+</html>
